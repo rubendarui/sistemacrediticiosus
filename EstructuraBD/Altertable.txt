@@ -1,0 +1,8 @@
+ALTER TABLE `modulo` ADD `created_at` TIMESTAMP NOT NULL AFTER `eliminado`, ADD `updated_at` TIMESTAMP NOT NULL AFTER `created_at`;
+ALTER TABLE `objeto` ADD `created_at` TIMESTAMP NOT NULL , ADD `updated_at` TIMESTAMP NOT NULL AFTER `created_at`;
+ALTER TABLE `perfil` ADD `created_at` TIMESTAMP NOT NULL , ADD `updated_at` TIMESTAMP NOT NULL AFTER `created_at`;
+ALTER TABLE `perfilobjeto` ADD `created_at` TIMESTAMP NOT NULL  , ADD `updated_at` TIMESTAMP NOT NULL AFTER `created_at`;
+ALTER TABLE `usuario` ADD `created_at` TIMESTAMP NOT NULL  , ADD `updated_at` TIMESTAMP NOT NULL AFTER `created_at`;
+ALTER TABLE `configuraciones` ADD `created_at` TIMESTAMP NOT NULL  , ADD `updated_at` TIMESTAMP NOT NULL AFTER `created_at`;
+ALTER TABLE `tipoempresa` ADD `created_at` TIMESTAMP NOT NULL  , ADD `updated_at` TIMESTAMP NOT NULL AFTER `created_at`;
+------205436-

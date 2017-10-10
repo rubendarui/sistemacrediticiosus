@@ -1,0 +1,2 @@
+INSERT INTO `objeto` (`id`, `nombre`, `url`, `tipoobjeto`, `visibleconelmenu`, `idmodulo`, `eliminar`, `habilitado`, `padre`, `font`) VALUES
+(7, 'Objetos', '/objeto', 'Formulario', 1, 1, 0, 1, 1, '');.
