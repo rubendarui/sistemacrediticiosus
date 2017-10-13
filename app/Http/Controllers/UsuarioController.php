@@ -3,95 +3,54 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Modulo;
 use App\Http\Requests;
+use App\Usuario;
 use DB;
 
-class ModuloController extends Controller {
+class UsuarioController extends Controller {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index() {
-        $Modulo = Modulo::latest()->paginate(4);
-        return response()->json($Modulo);
+        $Usuario = Usuario::latest()->paginate(4);
+        return response()->json($Usuario);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create() {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request) {
-        $create = Modulo::create($request->all());
+        $create = Usuario::create($request->all());
         return response()->json($create);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id) {
-        $show = Modulo::find($id);
+        $show = Usuario::find($id);
         return response()->json($show);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id) {
         
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id) {
-        $edit = Modulo::find($id)->update($request->all());
+        $edit = Usuario::find($id)->update($request->all());
         return response()->json($edit);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id) {
-        $edit = Modulo::find($id)->update(['eliminado' => 1]);
-
-        // ->update(['votes' => 1]);
+        $edit = Usuario::find($id)->update(['eliminado' => 1]);
         return response()->json($edit);
     }
 
-    public function allModulos(Request $request) {
+    public function allUsuarios(Request $request) {
         $columns = array(
             0 => 'id',
             1 => 'nombre',
+            1 => 'apellido',
+            1 => 'ci',
             2 => 'action',
         );
-        $totalData = DB::table('modulo')
+        $totalData = DB::table('usuario')
                 ->where('eliminado', '=', 0)
                 ->count();
         $totalFiltered = $totalData;
@@ -100,7 +59,7 @@ class ModuloController extends Controller {
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
         if (empty($request->input('search.value'))) {
-            $posts = DB::table('modulo')
+            $posts = DB::table('usuario')
                     ->where('eliminado', '=', 0)
                     ->offset($start)
                     ->limit($limit)
@@ -108,18 +67,22 @@ class ModuloController extends Controller {
                     ->get();
         } else {
             $search = $request->input('search.value');
-            $posts = DB::table('modulo')
+            $posts = DB::table('usuario')
                     ->where('eliminado', '=', 0)
                     ->where('id', 'LIKE', "%{$search}%")
                     ->orWhere('nombre', 'LIKE', "%{$search}%")
+                    ->orWhere('apellido', 'LIKE', "%{$search}%")
+                    ->orWhere('ci', 'LIKE', "%{$search}%")
                     ->offset($start)
                     ->limit($limit)
                     ->orderBy($order, $dir)
                     ->get();
-            $totalFiltered = DB::table('modulo')
+            $totalFiltered = DB::table('usuario')
                     ->where('eliminado', '=', 0)
                     ->where('id', 'LIKE', "%{$search}%")
                     ->orWhere('nombre', 'LIKE', "%{$search}%")
+                    ->orWhere('apellido', 'LIKE', "%{$search}%")
+                    ->orWhere('ci', 'LIKE', "%{$search}%")
                     ->count();
         }
         $data = array();
@@ -130,9 +93,11 @@ class ModuloController extends Controller {
                 $nestedData["DT_RowId"] = $post->id;
                 $nestedData['id'] = $post->id;
                 $nestedData['nombre'] = $post->nombre;
+                $nestedData['apellido'] = $post->apellido;
+                $nestedData['ci'] = $post->ci;
                 $nestedData['action'] = "&emsp; 
-                                          <button data-toggle='modal' data-target='#edit-item'  onclick='mostrardata({$post->id})' class='btn btn-primary edit-item'>Edit</button> 
-                                          &emsp;<button class='btn btn-danger remove-item'>Delete</button>";
+                                          <button data-toggle='modal' data-target='#edit-item' title='Editar'  onclick='mostrardata({$post->id})' class='btn btn-primary edit-item'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> 
+                                          &emsp;<button class='btn btn-danger remove-item' title='Eliminar'><i class='fa fa-times' aria-hidden='true'></i></button>";
                 $data[] = $nestedData;
             }
         }

@@ -37,7 +37,8 @@ class UrlController extends Controller {
     public function usuarios() {
         $titulo = $this->titulo;
         $subtitulo = $this->subtitulo;
-        return view('Formularios/usuarios', compact('titulo', 'subtitulo'));
+        $perfil = DB::table('perfil')->select('id', 'nombre' )->where('eliminado', '=', 0)->lists('nombre', 'id');
+        return view('Formularios/usuarios', compact('titulo', 'subtitulo','perfil'));
     }
 
     public function accesos() {

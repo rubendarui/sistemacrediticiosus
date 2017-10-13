@@ -28,6 +28,7 @@ Route::resource('item-ajax', 'ItemAjaxController');
 Route::resource('Url', 'UrlController');
 Route::resource('Modulo', 'ModuloController');
 Route::resource('Objeto', 'ObjetoController');
+Route::resource('Usuario', 'UsuarioController');
 Route::resource('Perfilobjeto', 'PerfilobjetoController');
 //--------------Fin----
 Route::get('/', 'UrlController@index');
@@ -41,6 +42,7 @@ Route::get('/empresas','UrlController@empresas');
 Route::get('/objeto','UrlController@objeto');
 
 
+Route::post('allUsuario', 'UsuarioController@allUsuarios' )->name('allUsuario');
 Route::post('allmodulo', 'ModuloController@allModulos' )->name('allmodulo');
 Route::post('allobjeto', 'ObjetoController@allObjeto' )->name('allobjeto');
 Route::get('selectmodulo','ObjetoController@selectmodulo');

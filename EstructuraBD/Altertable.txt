@@ -5,4 +5,18 @@ ALTER TABLE `perfilobjeto` ADD `created_at` TIMESTAMP NOT NULL  , ADD `updated_a
 ALTER TABLE `usuario` ADD `created_at` TIMESTAMP NOT NULL  , ADD `updated_at` TIMESTAMP NOT NULL AFTER `created_at`;
 ALTER TABLE `configuraciones` ADD `created_at` TIMESTAMP NOT NULL  , ADD `updated_at` TIMESTAMP NOT NULL AFTER `created_at`;
 ALTER TABLE `tipoempresa` ADD `created_at` TIMESTAMP NOT NULL  , ADD `updated_at` TIMESTAMP NOT NULL AFTER `created_at`;
-------205436-
+
+//agragacion del atributo de idConfiguracion y elminado!
+ALTER TABLE `usuario` ADD `idConfiguracion` INT NOT NULL AFTER `idperfil`;
+ALTER TABLE `usuario` ADD `eliminado` INT NOT NULL AFTER `idConfiguracion`;
+
+ALTER TABLE `usuario` CHANGE `usuario` `usuario` VARCHAR(50) NOT NULL;
+ALTER TABLE `usuario` CHANGE `pasword` `pasword` VARCHAR(25) NOT NULL;
+ALTER TABLE `usuario` CHANGE `razonsocial` `razonsocial` VARCHAR(50) NOT NULL;
+
+//para hacer este cambio se debe quitar la relacion de la llave foranea de id del usuario con perfil(aunq nose xq esta esto :v),
+//lo que ise yo es q exporte la bd y quite esta parte del script:
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `FK` FOREIGN KEY (`id`) REFERENCES `perfil` (`id`);
+// la volvi a importar y recien ejecuto lo siguiente:
+ALTER TABLE `usuario` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
