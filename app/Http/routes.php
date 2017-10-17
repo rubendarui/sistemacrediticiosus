@@ -29,6 +29,8 @@ Route::resource('Url', 'UrlController');
 Route::resource('Modulo', 'ModuloController');
 Route::resource('Objeto', 'ObjetoController');
 Route::resource('Usuario', 'UsuarioController');
+Route::resource('TipoEmpresa', 'TipoEmpresaController');
+Route::resource('Configuracion', 'ConfiguracionController');
 Route::resource('Perfilobjeto', 'PerfilobjetoController');
 //--------------Fin----
 Route::get('/', 'UrlController@index');
@@ -38,10 +40,12 @@ Route::get('/usuarios', 'UrlController@usuarios');
 Route::get('/accesos', 'UrlController@accesos');
 Route::get('/modulos','UrlController@modulos');
 Route::get('/empresas','UrlController@empresas');
-
+Route::get('/tipoEmpresa','UrlController@tipoEmpresa');
+Route::get('/configuracion','UrlController@configuracion');
 Route::get('/objeto','UrlController@objeto');
 
-
+Route::post('allConfiguracion', 'ConfiguracionController@allConfiguracion' )->name('allConfiguracion');
+Route::post('allTipoEmpresa', 'TipoEmpresaController@allTipoEmpresa' )->name('allTipoEmpresa');
 Route::post('allUsuario', 'UsuarioController@allUsuarios' )->name('allUsuario');
 Route::post('allmodulo', 'ModuloController@allModulos' )->name('allmodulo');
 Route::post('allobjeto', 'ObjetoController@allObjeto' )->name('allobjeto');

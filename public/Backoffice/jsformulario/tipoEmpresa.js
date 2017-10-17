@@ -39,7 +39,7 @@ $(document).ready(function () {
                 "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "/allUsuario",
+            "url": "/allTipoEmpresa",
             "dataType": "json",
             "type": "POST",
             "data": {_token: token}
@@ -47,9 +47,8 @@ $(document).ready(function () {
         "columns": [
             {"data": "id"},
             {"data": "nombre"},
-            {"data": "apellido"},
-            {"data": "ci"},
-            {"data": "action"}
+            {"data": "estado"},
+            {"data": "action"},
         ]
     });
 
@@ -67,34 +66,17 @@ $(".crud-submit").click(function (e) {
     var form_action = $("#create-item").find("form").attr("action");
     debugger;
     var nombre = $("#create-item").find("input[name='nombre']").val();
-    var apellido = $("#create-item").find("input[name='apellido']").val();
-    var ci = $("#create-item").find("input[name='ci']").val();
-    var direccion = $("#create-item").find("input[name='direccion']").val();
-    var telefono = $("#create-item").find("input[name='telefono']").val();
-    var celular = $("#create-item").find("input[name='celular']").val();
-    var nit = $("#create-item").find("input[name='nit']").val();
-    var rsocial = $("#create-item").find("input[name='rsocial']").val();
-    var usuario = $("#create-item").find("input[name='usuario']").val();
-    var pass = $("#create-item").find("input[name='pass']").val();
-    var perfil = $("#create-item").find("select[name='perfil']").val();
-    var configuracion = $("#create-item").find("select[name='configuracion']").val();
+    var estado = $("#create-item").find("select[name='estado']").val();
+    if (estado == "") {
+        return alert('Seleccione un estado');
+    }
 
     $.ajax({
         dataType: 'json',
         type: 'POST',
         url: form_action,
         data: {nombre: nombre,
-            apellido: apellido,
-            ci: ci,
-            direccion: direccion,
-            usuario: usuario,
-            pasword: pass,
-            telefono: telefono,
-            celular: celular,
-            nit: nit,
-            razonsocial: rsocial,
-            idperfil: perfil,
-            idConfiguracion:configuracion}
+            estado: estado}
     }).done(function (data) {
 
         cargartabla.ajax.reload();
@@ -108,24 +90,13 @@ $(".crud-submit").click(function (e) {
 /* Editar  */
 function mostrardata(data) {
     debugger;
-    var route = "/Usuario/" + data;
+    var route = "/TipoEmpresa/" + data;
     $("#edit-item").find("form").attr("action", url + '/' + data);
     $.get(route, function (res) {
         $(res).each(function (key, value) {
             $("#edit-item").find("input[name='nombre']").val(value.nombre);
-            $("#edit-item").find("input[name='apellido']").val(value.apellido);
-            $("#edit-item").find("input[name='ci']").val(value.ci);
-            $("#edit-item").find("input[name='direccion']").val(value.direccion);
-            $("#edit-item").find("input[name='telefono']").val(value.telefono);
-            $("#edit-item").find("input[name='celular']").val(value.celular);
-            $("#edit-item").find("input[name='nit']").val(value.nit);
-            $("#edit-item").find("input[name='rsocial']").val(value.razonsocial);
-            $("#edit-item").find("input[name='usuario']").val(value.nombre);
-            $("#edit-item").find("input[name='pass']").val(value.pasword);
-            $("#edit-item").find("select[name='perfil']").val(value.idperfil);
-            document.getElementsByName("perfil").value=value.idperfil;
-            $("#edit-item").find("select[name='configuracion']").val(value.idConfiguracion);
-            document.getElementsByName("configuracion").value=value.idConfiguracion;
+            $("#edit-item").find("select[name='estado']").val(value.estado);
+            document.getElementsByName("estado").value = value.estado;
         });
     });
 
@@ -136,33 +107,13 @@ $(".crud-submit-edit").click(function (e) {
     e.preventDefault();
     var form_action = $("#edit-item").find("form").attr("action");
     var nombre = $("#edit-item").find("input[name='nombre']").val();
-    var apellido = $("#edit-item").find("input[name='apellido']").val();
-    var ci = $("#edit-item").find("input[name='ci']").val();
-    var direccion = $("#edit-item").find("input[name='direccion']").val();
-    var telefono = $("#edit-item").find("input[name='telefono']").val();
-    var celular = $("#edit-item").find("input[name='celular']").val();
-    var nit = $("#edit-item").find("input[name='nit']").val();
-    var rsocial = $("#edit-item").find("input[name='rsocial']").val();
-    var usuario = $("#edit-item").find("input[name='usuario']").val();
-    var pass = $("#edit-item").find("input[name='pass']").val();
-    var perfil = $("#edit-item").find("select[name='perfil']").val();
-    var configuracion = $("#edit-item").find("select[name='configuracion']").val();
+    var estado = $("#edit-item").find("select[name='estado']").val();
     $.ajax({
         dataType: 'json',
         type: 'PUT',
         url: form_action,
         data: {nombre: nombre,
-            apellido: apellido,
-            ci: ci,
-            direccion: direccion,
-            usuario: usuario,
-            pasword: pass,
-            telefono: telefono,
-            celular: celular,
-            nit: nit,
-            razonsocial: rsocial,
-            idperfil: perfil,
-        	idConfiguracion:configuracion}
+            estado: estado}
     }).done(function (data) {
 
         cargartabla.ajax.reload();

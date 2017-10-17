@@ -39,7 +39,7 @@ $(document).ready(function () {
                 "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "/allUsuario",
+            "url": "/allConfiguracion",
             "dataType": "json",
             "type": "POST",
             "data": {_token: token}
@@ -47,14 +47,48 @@ $(document).ready(function () {
         "columns": [
             {"data": "id"},
             {"data": "nombre"},
-            {"data": "apellido"},
-            {"data": "ci"},
+            {"data": "actividad"},
+            {"data": "propietario"},
+            {"data": "nit"},
+            {"data": "correo"},
             {"data": "action"}
         ]
     });
 
 });
 /* Generar token*/
+
+//$(function () {
+//    $('#file-input').change(function (e) {
+//        addImage(e);
+//    });
+//
+//    function addImage(e) {
+//        debugger;
+//        var file = e.target.files[0],
+//                imageType = /image.*/;
+//        if (typeof file === "undefined") {
+//            document.getElementById('imgSalida').src = "Backoffice/img/avatar.jpg";
+//            return;
+//        }
+//        var reader = new FileReader();
+//        reader.onload = fileOnload;
+//        reader.readAsDataURL(file);
+//    }
+//
+//    function fileOnload(e) {
+//        debugger;
+//        var result = e.target.result;
+//        $('#imgSalida').attr("src", result);
+//    }
+//});
+
+function limpiar() {
+    $('div').removeClass('file-input-new');
+    $('.file-preview-thumbnails').empty();
+    $(".file-input").addClass('file-input-new');
+    $(".file-caption-name").text("");
+}
 
 $.ajaxSetup({
     headers: {
@@ -67,34 +101,29 @@ $(".crud-submit").click(function (e) {
     var form_action = $("#create-item").find("form").attr("action");
     debugger;
     var nombre = $("#create-item").find("input[name='nombre']").val();
-    var apellido = $("#create-item").find("input[name='apellido']").val();
-    var ci = $("#create-item").find("input[name='ci']").val();
-    var direccion = $("#create-item").find("input[name='direccion']").val();
-    var telefono = $("#create-item").find("input[name='telefono']").val();
-    var celular = $("#create-item").find("input[name='celular']").val();
+    var actividad = $("#create-item").find("input[name='actividad']").val();
+    var propietario = $("#create-item").find("input[name='propietario']").val();
     var nit = $("#create-item").find("input[name='nit']").val();
-    var rsocial = $("#create-item").find("input[name='rsocial']").val();
-    var usuario = $("#create-item").find("input[name='usuario']").val();
-    var pass = $("#create-item").find("input[name='pass']").val();
-    var perfil = $("#create-item").find("select[name='perfil']").val();
-    var configuracion = $("#create-item").find("select[name='configuracion']").val();
-
+    var correo = $("#create-item").find("input[name='correo']").val();
+    var descripcion = $("#create-item").find("input[name='descripcion']").val();
+    var tempresa = $("#create-item").find("select[name='tEmpresa']").val();
+    var logo = $("#create-item").find("img[name='imagen']").attr('src');
     $.ajax({
         dataType: 'json',
         type: 'POST',
         url: form_action,
         data: {nombre: nombre,
-            apellido: apellido,
-            ci: ci,
-            direccion: direccion,
-            usuario: usuario,
-            pasword: pass,
-            telefono: telefono,
-            celular: celular,
+            actividad: actividad,
             nit: nit,
-            razonsocial: rsocial,
-            idperfil: perfil,
-            idConfiguracion:configuracion}
+            propietario: propietario,
+            correo: correo,
+            descripcion: descripcion,
+            logo: logo,
+            idtipoempresa: tempresa}
+//        data: formData,
+//        cache: false,
+//        contentType: false,
+//        processData: false
     }).done(function (data) {
 
         cargartabla.ajax.reload();
@@ -108,24 +137,33 @@ $(".crud-submit").click(function (e) {
 /* Editar  */
 function mostrardata(data) {
     debugger;
-    var route = "/Usuario/" + data;
+    $('div').removeClass('file-input-new');
+    $('.file-preview-thumbnails').empty();
+//    var top = document.getElementsByClassName("file-preview-thumbnails");
+//    var nested = document.getElementsByClassName("file-preview-frame");
+//    if (nested.length != 0) {
+////        var garbage = top.removeChild(nested);
+//    }
+    var route = "/Configuracion/" + data;
     $("#edit-item").find("form").attr("action", url + '/' + data);
     $.get(route, function (res) {
         $(res).each(function (key, value) {
+            if (value.logo == "") {
+                $(".file-input").addClass('file-input-new');
+                $(".file-caption-name").text("");
+            } else {
+                var tabladatos = $('.file-preview-thumbnails');
+                tabladatos.append("<div class='file-preview-frame'><img src=" + value.logo + " id='imagen' name='imagen' class='file-preview-image'></div>");
+            }
             $("#edit-item").find("input[name='nombre']").val(value.nombre);
-            $("#edit-item").find("input[name='apellido']").val(value.apellido);
-            $("#edit-item").find("input[name='ci']").val(value.ci);
-            $("#edit-item").find("input[name='direccion']").val(value.direccion);
-            $("#edit-item").find("input[name='telefono']").val(value.telefono);
-            $("#edit-item").find("input[name='celular']").val(value.celular);
+            $("#edit-item").find("input[name='actividad']").val(value.actividad);
             $("#edit-item").find("input[name='nit']").val(value.nit);
-            $("#edit-item").find("input[name='rsocial']").val(value.razonsocial);
-            $("#edit-item").find("input[name='usuario']").val(value.nombre);
-            $("#edit-item").find("input[name='pass']").val(value.pasword);
-            $("#edit-item").find("select[name='perfil']").val(value.idperfil);
-            document.getElementsByName("perfil").value=value.idperfil;
-            $("#edit-item").find("select[name='configuracion']").val(value.idConfiguracion);
-            document.getElementsByName("configuracion").value=value.idConfiguracion;
+            $("#edit-item").find("input[name='propietario']").val(value.propietario);
+            $("#edit-item").find("input[name='correo']").val(value.correo);
+            $("#edit-item").find("input[name='descripcion']").val(value.descripcion);
+            $("#edit-item").find("input[name='logo']").attr("src", value.logo);
+            $("#edit-item").find("select[name='tEmpresa']").val(value.idtipoempresa);
+            document.getElementsByName("tEmpresa").value = value.idtipoempresa;
         });
     });
 
@@ -136,33 +174,26 @@ $(".crud-submit-edit").click(function (e) {
     e.preventDefault();
     var form_action = $("#edit-item").find("form").attr("action");
     var nombre = $("#edit-item").find("input[name='nombre']").val();
-    var apellido = $("#edit-item").find("input[name='apellido']").val();
-    var ci = $("#edit-item").find("input[name='ci']").val();
-    var direccion = $("#edit-item").find("input[name='direccion']").val();
-    var telefono = $("#edit-item").find("input[name='telefono']").val();
-    var celular = $("#edit-item").find("input[name='celular']").val();
+    var actividad = $("#edit-item").find("input[name='actividad']").val();
+    var propietario = $("#edit-item").find("input[name='propietario']").val();
     var nit = $("#edit-item").find("input[name='nit']").val();
-    var rsocial = $("#edit-item").find("input[name='rsocial']").val();
-    var usuario = $("#edit-item").find("input[name='usuario']").val();
-    var pass = $("#edit-item").find("input[name='pass']").val();
-    var perfil = $("#edit-item").find("select[name='perfil']").val();
-    var configuracion = $("#edit-item").find("select[name='configuracion']").val();
+    var correo = $("#edit-item").find("input[name='correo']").val();
+    var descripcion = $("#edit-item").find("input[name='descripcion']").val();
+    var tempresa = $("#edit-item").find("select[name='tEmpresa']").val();
+    var logo = $("#edit-item").find("img[name='imagen']").attr('src');
+
     $.ajax({
         dataType: 'json',
         type: 'PUT',
         url: form_action,
         data: {nombre: nombre,
-            apellido: apellido,
-            ci: ci,
-            direccion: direccion,
-            usuario: usuario,
-            pasword: pass,
-            telefono: telefono,
-            celular: celular,
+            actividad: actividad,
             nit: nit,
-            razonsocial: rsocial,
-            idperfil: perfil,
-        	idConfiguracion:configuracion}
+            propietario: propietario,
+            correo: correo,
+            descripcion: descripcion,
+            logo: logo,
+            idtipoempresa: tempresa}
     }).done(function (data) {
 
         cargartabla.ajax.reload();

@@ -37,8 +37,9 @@ class UrlController extends Controller {
     public function usuarios() {
         $titulo = $this->titulo;
         $subtitulo = $this->subtitulo;
-        $perfil = DB::table('perfil')->select('id', 'nombre' )->where('eliminado', '=', 0)->lists('nombre', 'id');
-        return view('Formularios/usuarios', compact('titulo', 'subtitulo','perfil'));
+        $perfil = DB::table('perfil')->select('id', 'nombre')->where('eliminado', '=', 0)->lists('nombre', 'id');
+        $configuracion = DB::table('configuraciones')->select('id', 'nombre')->where('eliminado', '=', 0)->lists('nombre', 'id');
+        return view('Formularios/usuarios', compact('titulo', 'subtitulo', 'perfil','configuracion'));
     }
 
     public function accesos() {
@@ -64,14 +65,27 @@ class UrlController extends Controller {
         $subtitulo = $this->subtitulo;
         return view('Formularios/objeto', compact('titulo', 'subtitulo'));
     }
+
     public function perfilobjeto() {
         $titulo = $this->titulo;
         $subtitulo = $this->subtitulo;
-        $perfil = DB::table('perfil')->select('id', 'nombre' )->where('eliminado', '=', 0)->get();
-        return view('Formularios/perfilobjeto', compact('titulo', 'subtitulo','perfil'));
+        $perfil = DB::table('perfil')->select('id', 'nombre')->where('eliminado', '=', 0)->get();
+        return view('Formularios/perfilobjeto', compact('titulo', 'subtitulo', 'perfil'));
     }
- 
 
+    public function tipoEmpresa() {
+        $titulo = $this->titulo;
+        $subtitulo = $this->subtitulo;
+        return view('Formularios/tipoEmpresa', compact('titulo', 'subtitulo'));
+    }
+
+    public function configuracion() {
+        $titulo = $this->titulo;
+        $subtitulo = $this->subtitulo;
+        $tipoEmpresa = DB::table('tipoempresa')->select('id', 'nombre')->where('eliminado', 0)->where('estado', 0)->lists('nombre', 'id');
+        return view('Formularios/configuracion', compact('titulo', 'subtitulo','tipoEmpresa'));
+    }
 
 }
- //
+
+//

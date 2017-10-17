@@ -20,3 +20,8 @@ ALTER TABLE `usuario`
   ADD CONSTRAINT `FK` FOREIGN KEY (`id`) REFERENCES `perfil` (`id`);
 // la volvi a importar y recien ejecuto lo siguiente:
 ALTER TABLE `usuario` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
+
+//añado un atributo a la tabla de tipo empresa
+ALTER TABLE `tipoempresa` ADD `eliminado` INT NOT NULL AFTER `estado`;
+ALTER TABLE `configuraciones` CHANGE `logo` `logo` MEDIUMBLOB NOT NULL;
+ALTER TABLE `configuraciones` ADD `eliminado` INT NOT NULL AFTER `idtipoempresa`;
