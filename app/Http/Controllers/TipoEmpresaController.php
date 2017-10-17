@@ -89,9 +89,9 @@ class TipoEmpresaController extends Controller {
                 $nestedData['id'] = $post->id;
                 $nestedData['nombre'] = $post->nombre;
                 if($post->estado == 1){
-                    $nestedData['estado'] = "NO";
+                    $nestedData['estado'] = "SI";
                 }else{
-                   $nestedData['estado'] = "SI"; 
+                   $nestedData['estado'] = "NO"; 
                 }
                 
                 

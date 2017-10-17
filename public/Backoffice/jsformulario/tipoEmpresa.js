@@ -80,7 +80,7 @@ $(".crud-submit").click(function (e) {
     }).done(function (data) {
 
         cargartabla.ajax.reload();
-        $(".modal").modal('hide');
+        $('#create-item').modal('hide');
 
         $("#create-item").find("input[name='nombre']").val('');
 
@@ -115,10 +115,9 @@ $(".crud-submit-edit").click(function (e) {
         data: {nombre: nombre,
             estado: estado}
     }).done(function (data) {
-
         cargartabla.ajax.reload();
         $('#edit-item').modal('toggle');
-
+        
         swal(
                 'Actualizacion Exitosa!',
                 ' :) ',

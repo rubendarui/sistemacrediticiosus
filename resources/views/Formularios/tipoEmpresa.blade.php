@@ -21,7 +21,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Activado</th>
+                            <th>Habilitar</th>
                             <th disabled>Action</th>
                         </tr>
                     </thead >

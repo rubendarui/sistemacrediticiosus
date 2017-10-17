@@ -16,11 +16,10 @@
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            <label class="control-label" for="nombre">Activado:</label>
+                            <label class="control-label" for="nombre">Habilitar:</label>
                             <select class="form-control" name="estado" >
-                                <option value="">Seleccione un estado</option>
-                                <option value="1">SI</option>
-                                <option value="0">NO</option>
+                                <option value="0">SI</option>
+                                <option value="1">NO</option>
                             </select>
                         </div>
                     </div>
@@ -52,9 +51,8 @@
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <label class="control-label" for="nombre">Activado:</label>
+                            <label class="control-label" for="nombre">Habilitar:</label>
                             <select class="form-control" name="estado">
-                                <option value="">Seleccione un estado</option>
                                 <option value="1">SI</option>
                                 <option value="0">NO</option>
                             </select>

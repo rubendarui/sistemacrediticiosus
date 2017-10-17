@@ -73,7 +73,7 @@ $(".crud-submit").click(function (e) {
     }).done(function (data) {
 
         cargartabla.ajax.reload();
-        $(".modal").modal('hide');
+        $('#create-item').modal('hide');
 
         $("#create-item").find("input[name='nombre']").val('');
 
