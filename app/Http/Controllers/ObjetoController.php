@@ -161,7 +161,10 @@ class ObjetoController extends Controller
      */
     public function destroy($id)
     {
-        //
+           $edit = Objeto::find($id)->update(['eliminar' => 1]);
+
+       
+        return response()->json($edit);
     }
 public function selectmodulo()
 {

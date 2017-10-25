@@ -5,3 +5,33 @@ INSERT INTO `objeto` (`id`, `nombre`, `url`, `tipoobjeto`, `visibleconelmenu`, `
 INSERT INTO `objeto` (`id`, `nombre`, `url`, `tipoobjeto`, `visibleconelmenu`, `idmodulo`, `eliminar`, `habilitado`, `padre`, `font`, `created_at`, `updated_at`) VALUES
 (15, 'Tipo Empresa', '/tipoEmpresa', 'Formulario', 0, 1, 0, 0, 1, '', '2017-10-16 22:59:43', '0000-00-00 00:00:00'),
 (16, 'Configuracion G.', '/configuracion', 'Formulario', 0, 1, 0, 0, 1, '', '2017-10-16 23:00:03', '0000-00-00 00:00:00');
+
+//insert de la tabla modulo //25/10/2017 by ruben dario ayala
+//elimnar los datos de la tabla y insertar el siguiente 
+
+INSERT INTO `modulo` (`id`, `nombre`, `eliminado`, `created_at`, `updated_at`) VALUES
+(1, 'Configuraciones', 0, '2017-08-21 21:18:20', '2017-08-22 01:18:20'),
+(2, 'Cuestionarios', 0, '2017-10-25 23:03:10', '2017-10-25 23:03:10'),
+(3, 'Pagos', 0, '2017-10-25 23:03:20', '2017-10-25 23:03:20'),
+(4, 'Soporte', 0, '2017-10-25 23:03:39', '2017-10-25 23:03:39'),
+(5, 'Reportes', 0, '2017-10-25 23:08:08', '2017-10-25 23:08:08');
+//insert de la tabla objeto //25/10/2017 by ruben dario ayala
+--
+-- elimnar los datos de la tabla y insertar el siguiente 
+--
+
+INSERT INTO `objeto` (`id`, `nombre`, `url`, `tipoobjeto`, `visibleconelmenu`, `idmodulo`, `eliminar`, `habilitado`, `padre`, `font`, `created_at`, `updated_at`) VALUES
+(1, 'Configuraciones', 'config', 'Titulo', 1, 1, 0, 1, 0, 'fa fa-etsy', '2017-08-28 05:58:39', '0000-00-00 00:00:00'),
+(2, 'usuarios', '/usuarios', 'Formulario', 1, 1, 0, 1, 1, '', '2017-08-20 23:35:34', '0000-00-00 00:00:00'),
+(3, 'accesos', '/accesos', 'Formulario', 1, 1, 0, 1, 1, '', '2017-08-20 23:35:34', '0000-00-00 00:00:00'),
+(4, 'modulos', '/modulos', 'Formulario', 1, 1, 0, 1, 1, '', '2017-08-20 23:35:34', '0000-00-00 00:00:00'),
+(7, 'Objetos', '/objeto', 'Formulario', 1, 1, 0, 1, 1, '', '2017-08-20 23:35:34', '0000-00-00 00:00:00'),
+(12, 'PerfilObjeto', '/perfilobjeto', 'Formulario', 0, 1, 0, 0, 1, '', '2017-08-28 19:59:41', '0000-00-00 00:00:00'),
+(15, 'Tipo Empresa', '/tipoEmpresa', 'Formulario', 0, 1, 0, 0, 1, '', '2017-10-17 02:59:43', '0000-00-00 00:00:00'),
+(16, 'Configuracion G.', '/configuracion', 'Formulario', 0, 1, 0, 0, 1, '', '2017-10-17 03:00:03', '0000-00-00 00:00:00'),
+(18, 'Cuestionario', '/cuestionario', 'Titulo', 0, 2, 0, 0, 0, 'fa fa-id-card', '2017-10-25 23:06:07', '0000-00-00 00:00:00'),
+(19, 'Pagos', '/pagos', 'Titulo', 0, 3, 0, 0, 0, 'fa fa-cc-amex', '2017-10-25 23:07:45', '0000-00-00 00:00:00'),
+(20, 'Reportes', '/reporte', 'Titulo', 0, 5, 0, 0, 0, 'fa fa-cogs', '2017-10-25 23:16:54', '0000-00-00 00:00:00');
+//****************************************************************************************************************// 
+Fin
+

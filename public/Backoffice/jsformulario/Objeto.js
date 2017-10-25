@@ -185,3 +185,46 @@ $(".crud-submit-edit").click(function (e) {
     });
 
 });
+
+
+/* Eliminar Item */
+$("#posts").on("click", ".remove-item", function () {
+    debugger;
+    token;
+    var id = $(this).closest('tr').attr('id');
+    var c_obj = $(this).parents("tr");
+    swal({
+        title: 'ESTA SEGURO QUE DESEA ELIMINARLO?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'Si, eliminarla!',
+        cancelButtonText: 'No, cancelar!',
+        confirmButtonClass: false,
+        cancelButtonClass: false
+    }).then(function () {
+        $.ajax({
+            dataType: 'json',
+            type: 'delete',
+            url: url + '/' + id,
+              data: {_token: token}
+        }).done(function (data) {
+            cargartabla.ajax.reload();
+            swal(
+                    'Eliminado Exitoso!',
+                    ' .',
+                    'success'
+                    )
+        });
+    }, function (dismiss) {
+
+        if (dismiss === 'cancel') {
+            swal(
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
+                    )
+        }
+    })
+
+});
