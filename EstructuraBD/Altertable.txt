@@ -57,5 +57,7 @@ COMMIT;
 
 //Agregacion de un atributo mas para la tabla Usuario
 ALTER TABLE `usuario` ADD `idSuscripcion` INT NOT NULL AFTER `idConfiguracion`;
+
+ALTER TABLE `usuario` CHANGE `pasword` `password` VARCHAR(25) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
   
   
