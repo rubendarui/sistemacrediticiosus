@@ -35,3 +35,8 @@ INSERT INTO `objeto` (`id`, `nombre`, `url`, `tipoobjeto`, `visibleconelmenu`, `
 //****************************************************************************************************************// 
 Fin
 
+//Insercion en la tabla objeto
+INSERT INTO `objeto` (`id`, `nombre`, `url`, `tipoobjeto`, `visibleconelmenu`, `idmodulo`, `eliminar`, `habilitado`, `padre`, `font`, `created_at`, `updated_at`) VALUES
+(21, 'Forma de Pago', '/formaPago', 'Formulario', 0, 3, 0, 0, 19, '', '2017-10-27 00:36:33', '0000-00-00 00:00:00'),
+(22, 'Plan', '/plan', 'Formulario', 0, 3, 0, 0, 19, '', '2017-10-27 04:04:03', '0000-00-00 00:00:00');
+(23, 'Suscripcion', '/suscripcion', 'Formulario', 0, 3, 0, 0, 19, '', '2017-10-27 02:30:11', '0000-00-00 00:00:00'),

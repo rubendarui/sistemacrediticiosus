@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Usuario;
 use DB;
+use Carbon\Carbon;
 
 class UsuarioController extends Controller {
 
@@ -33,6 +34,9 @@ class UsuarioController extends Controller {
     }
 
     public function update(Request $request, $id) {
+        //cambiar la parte del cambio de suscripcion que este en el editar usuario.
+        //si no cambio de suscripcion que verifique x base de datos si ha eligido otro distinto.
+        //si cambio otro que inserte en la tabla historico, sino que edite normalmente
         $edit = Usuario::find($id)->update($request->all());
         return response()->json($edit);
     }
@@ -40,6 +44,15 @@ class UsuarioController extends Controller {
     public function destroy($id) {
         $edit = Usuario::find($id)->update(['eliminado' => 1]);
         return response()->json($edit);
+    }
+
+    public function cambiarSuscripcion(Request $request,$id) {
+        $date = Carbon::now();
+        $fecha = $date->toDateString();
+        $hora = $date->toTimeString();
+        $actua = DB::table('usuario')->where('id', $id)->update(['idSuscripcion' => $request->idSuscripcion]);
+         DB::table('historicoPlan')->insert(['idSuscripcion' => $request->idSuscripcion, 'idUsuario' => $id, 'descripcion' => $request->descripcion, 'fecha' => $fecha, 'hora' => $hora]);
+        return response()->json($actua);
     }
 
     public function allUsuarios(Request $request) {
@@ -95,9 +108,11 @@ class UsuarioController extends Controller {
                 $nestedData['nombre'] = $post->nombre;
                 $nestedData['apellido'] = $post->apellido;
                 $nestedData['ci'] = $post->ci;
-                $nestedData['action'] = "&emsp; 
-                                          <button data-toggle='modal' data-target='#edit-item' title='Editar'  onclick='mostrardata({$post->id})' class='btn btn-primary edit-item'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> 
-                                          &emsp;<button class='btn btn-danger remove-item' title='Eliminar'><i class='fa fa-times' aria-hidden='true'></i></button>";
+                $nestedData['suscripcion'] = $post->ci;
+                $nestedData['action'] = "&emsp;<button data-toggle='modal' data-target='#edit-suscripcion' title='Cambiar Suscripcion'  onclick='mostrarSuscripcion({$post->id})' class='btn btn-primary edit-suscripcion'>Plan</button>
+                                         &emsp;<button data-toggle='modal' data-target='#edit-item' title='Editar'  onclick='mostrardata({$post->id})' class='btn btn-primary edit-item'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> 
+                                         &emsp;<button class='btn btn-danger remove-item' title='Eliminar'><i class='fa fa-times' aria-hidden='true'></i></button>
+                                         ";
                 $data[] = $nestedData;
             }
         }

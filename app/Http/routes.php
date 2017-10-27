@@ -32,6 +32,9 @@ Route::resource('Usuario', 'UsuarioController');
 Route::resource('TipoEmpresa', 'TipoEmpresaController');
 Route::resource('Configuracion', 'ConfiguracionController');
 Route::resource('Perfilobjeto', 'PerfilobjetoController');
+Route::resource('FormaPago', 'FormapagoController');
+Route::resource('Suscripcion', 'SuscripcionController');
+Route::resource('Plan', 'PlanController');
 //--------------Fin----
 Route::get('/', 'UrlController@index');
 Route::get('BackofficeAdminkatoo', 'UrlController@BackofficeAdminkatoo');
@@ -43,17 +46,24 @@ Route::get('/empresas','UrlController@empresas');
 Route::get('/tipoEmpresa','UrlController@tipoEmpresa');
 Route::get('/configuracion','UrlController@configuracion');
 Route::get('/objeto','UrlController@objeto');
+Route::get('/formaPago','UrlController@formaPago');
+Route::get('/suscripcion','UrlController@suscripcion');
+Route::get('/plan','UrlController@plan');
 
 Route::post('allConfiguracion', 'ConfiguracionController@allConfiguracion' )->name('allConfiguracion');
 Route::post('allTipoEmpresa', 'TipoEmpresaController@allTipoEmpresa' )->name('allTipoEmpresa');
 Route::post('allUsuario', 'UsuarioController@allUsuarios' )->name('allUsuario');
 Route::post('allmodulo', 'ModuloController@allModulos' )->name('allmodulo');
 Route::post('allobjeto', 'ObjetoController@allObjeto' )->name('allobjeto');
+Route::post('allformapago', 'FormaPagoController@allformapago' )->name('allformapago');
+Route::post('allsuscripcion', 'SuscripcionController@allsuscripcion' )->name('allsuscripcion');
+Route::post('allplan', 'PlanController@allplan' )->name('allplan');
 Route::get('selectmodulo','ObjetoController@selectmodulo');
   
 
 
 
+Route::POST('cambiarSuscripcion/{id}', 'UsuarioController@cambiarSuscripcion' );
 Route::get('/perfilobjeto','UrlController@perfilobjeto');
  
 Route::get('/consultapruba/{id}','PerfilobjetoController@consultapruba')->name('consultaacceso');

@@ -25,3 +25,37 @@ ALTER TABLE `usuario` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `tipoempresa` ADD `eliminado` INT NOT NULL AFTER `estado`;
 ALTER TABLE `configuraciones` CHANGE `logo` `logo` MEDIUMBLOB NOT NULL;
 ALTER TABLE `configuraciones` ADD `eliminado` INT NOT NULL AFTER `idtipoempresa`;
+
+
+//creando llave primaria
+ALTER TABLE `formapago`
+  ADD PRIMARY KEY (`id`);
+  ALTER TABLE `formapago`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+//creando llave primaria
+ALTER TABLE `plan`
+  ADD PRIMARY KEY (`id`);
+  ALTER TABLE `plan`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+  
+//creando llave primaria
+  ALTER TABLE `suscripcion`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `suscripcion`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+COMMIT;
+
+//creando llave primaria
+ALTER TABLE `historicoplan`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `historicoplan`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
+//Agregacion de un atributo mas para la tabla Usuario
+ALTER TABLE `usuario` ADD `idSuscripcion` INT NOT NULL AFTER `idConfiguracion`;
+  
+  

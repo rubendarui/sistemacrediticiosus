@@ -39,7 +39,8 @@ class UrlController extends Controller {
         $subtitulo = $this->subtitulo;
         $perfil = DB::table('perfil')->select('id', 'nombre')->where('eliminado', '=', 0)->lists('nombre', 'id');
         $configuracion = DB::table('configuraciones')->select('id', 'nombre')->where('eliminado', '=', 0)->lists('nombre', 'id');
-        return view('Formularios/usuarios', compact('titulo', 'subtitulo', 'perfil','configuracion'));
+        $suscripcion = DB::table('suscripcion')->select('id', 'nombre')->where('eliminado', '=', 0)->lists('nombre', 'id');
+        return view('Formularios/usuarios', compact('titulo', 'subtitulo', 'perfil', 'configuracion','suscripcion'));
     }
 
     public function accesos() {
@@ -83,7 +84,26 @@ class UrlController extends Controller {
         $titulo = $this->titulo;
         $subtitulo = $this->subtitulo;
         $tipoEmpresa = DB::table('tipoempresa')->select('id', 'nombre')->where('eliminado', 0)->where('estado', 0)->lists('nombre', 'id');
-        return view('Formularios/configuracion', compact('titulo', 'subtitulo','tipoEmpresa'));
+        return view('Formularios/configuracion', compact('titulo', 'subtitulo', 'tipoEmpresa'));
+    }
+
+    public function formaPago() {
+        $titulo = $this->titulo;
+        $subtitulo = $this->subtitulo;
+        return view('Formularios/formaPago', compact('titulo', 'subtitulo'));
+    }
+
+    public function plan() {
+        $titulo = $this->titulo;
+        $subtitulo = $this->subtitulo;
+        return view('Formularios/plan', compact('titulo', 'subtitulo'));
+    }
+
+    public function suscripcion() {
+        $titulo = $this->titulo;
+        $subtitulo = $this->subtitulo;
+        $plan = DB::table('plan')->select('id', 'nombre')->where('eliminado', 0)->lists('nombre', 'id');
+        return view('Formularios/suscripcion', compact('titulo', 'subtitulo','plan'));
     }
 
 }

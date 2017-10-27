@@ -1,0 +1,39 @@
+//Creacion de la tabla Forma de Pago
+CREATE TABLE `formapago` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `nombre` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `eliminado` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+//Creacion de la tabla Plan
+CREATE TABLE `plan` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `nombre` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `eliminado` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+//Creacion de la tabla suscripcion
+CREATE TABLE `suscripcion` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `nombre` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `idPlan` int(11) NOT NULL,
+  `eliminado` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+//Creacion de la tabla historicoPlan
+CREATE TABLE `historicoplan` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `idSuscripcion` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

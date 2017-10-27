@@ -85,6 +85,13 @@
                             {!! Form::select('Configuracion', $configuracion,null, ['id'=>'configuracion','name'=>'configuracion','class'=>'form-control']) !!}
                         </div>
                     </div>
+                    <div class="main row">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label class="control-label" for="suscripcion">Suscripcion:</label>
+                            {!! Form::select('Suscripcion', $suscripcion,null, ['name'=>'suscripcion','class'=>'form-control']) !!}
+                        </div>
+                        
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

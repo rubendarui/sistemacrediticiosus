@@ -78,6 +78,7 @@ $(".crud-submit").click(function (e) {
     var pass = $("#create-item").find("input[name='pass']").val();
     var perfil = $("#create-item").find("select[name='perfil']").val();
     var configuracion = $("#create-item").find("select[name='configuracion']").val();
+    var suscripcion = $("#create-item").find("select[name='suscripcion']").val();
 
     $.ajax({
         dataType: 'json',
@@ -94,7 +95,8 @@ $(".crud-submit").click(function (e) {
             nit: nit,
             razonsocial: rsocial,
             idperfil: perfil,
-            idConfiguracion:configuracion}
+            idConfiguracion: configuracion,
+            idSuscripcion: suscripcion}
     }).done(function (data) {
 
         cargartabla.ajax.reload();
@@ -123,13 +125,56 @@ function mostrardata(data) {
             $("#edit-item").find("input[name='usuario']").val(value.nombre);
             $("#edit-item").find("input[name='pass']").val(value.pasword);
             $("#edit-item").find("select[name='perfil']").val(value.idperfil);
-            document.getElementsByName("perfil").value=value.idperfil;
+            document.getElementsByName("perfil").value = value.idperfil;
             $("#edit-item").find("select[name='configuracion']").val(value.idConfiguracion);
-            document.getElementsByName("configuracion").value=value.idConfiguracion;
+            document.getElementsByName("configuracion").value = value.idConfiguracion;
         });
     });
 
 }
+
+/* Cambiar de Suscripcion  */
+function mostrarSuscripcion(data) {
+    debugger;
+    var route = "/Usuario/" + data;
+    $("#edit-suscripcion").find("form").attr("action", "cambiarSuscripcion" + '/' + data);
+    $.get(route, function (res) {
+        $(res).each(function (key, value) {
+            $("#edit-suscripcion").find("select[name='suscripcion']").val(value.idSuscripcion);
+            document.getElementsByName("suscripcion").value = value.idSuscripcion;
+        });
+    });
+}
+
+/* Actializar Suscripcion */
+$(".crud-submit-edit-suscripcion").click(function (e) {
+    debugger;
+    e.preventDefault();
+    var form_action = $("#edit-suscripcion").find("form").attr("action");
+    var idSuscripcion = $("#edit-suscripcion").find("select[name='suscripcion']").val();
+    var descripcion = $("#edit-suscripcion").find("input[name='descripcion']").val();
+
+    $.ajax({
+        dataType: 'json',
+        type: 'POST',
+        url: form_action,
+        data: {idSuscripcion: idSuscripcion,
+            descripcion: descripcion}
+    }).done(function (data) {
+
+        cargartabla.ajax.reload();
+        $('#edit-suscripcion').modal('toggle');
+
+        swal(
+                'Actualizacion Exitosa!',
+                ' :) ',
+                'success'
+                )
+    });
+
+});
+
+
 /* Actulizar */
 $(".crud-submit-edit").click(function (e) {
 
@@ -162,7 +207,7 @@ $(".crud-submit-edit").click(function (e) {
             nit: nit,
             razonsocial: rsocial,
             idperfil: perfil,
-        	idConfiguracion:configuracion}
+            idConfiguracion: configuracion}
     }).done(function (data) {
 
         cargartabla.ajax.reload();
